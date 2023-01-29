@@ -66,6 +66,13 @@ public class main {
 			case 2:
 				ItemMnue.Item();
 				break;
+			case 3:
+				InvoiveServer .SetInvoice(1);
+				break;
+				
+			case 4:
+				
+				break;
 				
 				
 			}

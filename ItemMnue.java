@@ -34,6 +34,7 @@ public class ItemMnue {
 					break;
 					
 				case 2:
+					ItemServer.deleteById();
 					break;
 				case 3:
 					break;

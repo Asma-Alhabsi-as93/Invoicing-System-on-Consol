@@ -56,16 +56,16 @@ public class InvoiveServer {
 		Connection con = null;
 		
 		
-		String customerFullName = "Ahmed saad mohameed";
-		String phoneNumber = "+99776544";
+		String customerFullName = "KHLOOD";
+		String phoneNumber = "+554367994";
 		Date invoiceDate = new Date(System.currentTimeMillis());
-		int numberOfItems=1;
-		int totalAmount=3;
-		int paidAmoun=20;
-		int balance=90;
+		int numberOfItems=3;
+		int totalAmount=8;
+		int paidAmoun=33;
+		int balance=12;
 		String Fax = "m6544";
-		String Email="asma@gmail.com";
-		String Website="url-tth-fhgfygwd/";
+		String Email="Fatema@gmail.com";
+		String Website="url-tth-fhgfygwd.kkh.vv";
 		Random rn = new Random();
 		Integer NumberToAdd = rn.nextInt(100);
 		Connection conn = null;
@@ -75,9 +75,8 @@ public class InvoiveServer {
 			conn = DriverManager.getConnection(url, username, password);
 			for (int i = 0; i <= number; i++) {
 
-				String insert1 = "Insert into invoice values(" + i  
-						
-						+ ",'" + customerFullName + "','"
+				String insert1 = "Insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance,Fax,Email,Website)"
+						+ " values( '" + customerFullName + "','"
 						+ phoneNumber + "','" + invoiceDate + "'," + numberOfItems + "," + totalAmount + ","
 								+ paidAmoun+ ","+ balance+ ",'"+Fax+"','"+Email+"','"+Website+"')";
 				System.out.println(insert1);
@@ -93,6 +92,46 @@ public class InvoiveServer {
 			if (conn != null)
 				conn.close();
 		}
+		
 	}
 
-}
+		public static void SetInvoice(int top) {
+			 String url = "jdbc:mysql://localhost:3306/ shibli_task";
+			 String username = "root";
+			 String password = "root";
+			Connection con = null;
+			try {
+				Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				// Registering drivers
+				DriverManager.registerDriver(driver);
+				// Reference to connection interface
+				con = DriverManager.getConnection(url, username, password);
+				// Creating a statement
+				Statement st = con.createStatement();
+				Scanner scanner = new Scanner(System.in);
+				int count = 1;
+				String sql="SELECT * FROM invoice ORDER BY id LIMIT "+top;
+				ResultSet rs = st.executeQuery(sql);
+				while (rs.next() && count <= top) {
+					int id = rs.getInt("id");
+
+//					String customerFullName = rs.getString("customerFullName");
+//					String phoneNumber = rs.getString("phoneNumber");
+//					Date invoiceDate = rs.getDate("invoiceDate");
+//					int numberOfItems = rs.getInt("numberOfItems");
+//					int totalAmount = rs.getInt("totalAmount");
+//					int paidAmoun = rs.getInt("paidAmoun");
+//					int balance = rs.getInt("balance");
+					String Fax = rs.getString("Fax");
+					String Email = rs.getString("Email");
+					String Website = rs.getString("Website");
+					System.out.println(" "+Fax+""+Email+" "+Website);
+					count++;
+				}
+			} catch (Exception ex) {
+				System.err.println(ex);
+			}
+		}
+
+
+	}

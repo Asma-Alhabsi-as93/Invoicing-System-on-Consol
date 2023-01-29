@@ -16,7 +16,7 @@ public class shopServer {
 		
 		int id=1;
 		String ShopName = "almeera shop";
-//		Random rn = new Random();
+//	Random rn = new Random();
 //		Integer NumberToAdd = rn.nextInt(100);
 		Connection conn = null;
 		try {
@@ -25,7 +25,8 @@ public class shopServer {
 			conn = DriverManager.getConnection(url, username, password);
 //			for (int i = 0; i <= number; i++) {
 
-				String insert1 = "Insert into shop values("+id+",'"+ShopName+"')";
+				String insert1 = "Insert into shop(id,ShopName)"
+						+ " values("+id+",'"+ShopName+"')";
 					
 
 				Statement st = conn.createStatement();
@@ -37,6 +38,7 @@ public class shopServer {
 			System.err.println(ex);
 				conn.close();
 		}
-	}
+	
 
+}
 }

@@ -33,10 +33,11 @@ public class subMenue {
 				break;
 				
 			case 2:
-				shopServer.insertIntShopoTable();
+				shopServer.insertIntShopoTable() ;
 				break;
 				
 			case 3:
+				InvoiveServer.SelectInvoice(2);
 				break;
 				
 			case 4:
