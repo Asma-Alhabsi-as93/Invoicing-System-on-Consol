@@ -63,9 +63,9 @@ public class InvoiveServer {
 		int totalAmount=8;
 		int paidAmoun=33;
 		int balance=12;
-		String Fax = "m6544";
-		String Email="Fatema@gmail.com";
-		String Website="url-tth-fhgfygwd.kkh.vv";
+//		String Fax = "m6544";
+//		String Email="Fatema@gmail.com";
+//		String Website="url-tth-fhgfygwd.kkh.vv";
 		Random rn = new Random();
 		Integer NumberToAdd = rn.nextInt(100);
 		Connection conn = null;
@@ -75,10 +75,10 @@ public class InvoiveServer {
 			conn = DriverManager.getConnection(url, username, password);
 			for (int i = 0; i <= number; i++) {
 
-				String insert1 = "Insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance,Fax,Email,Website)"
+				String insert1 = "Insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance)"
 						+ " values( '" + customerFullName + "','"
 						+ phoneNumber + "','" + invoiceDate + "'," + numberOfItems + "," + totalAmount + ","
-								+ paidAmoun+ ","+ balance+ ",'"+Fax+"','"+Email+"','"+Website+"')";
+								+ paidAmoun+ ","+ balance+ ")";
 				System.out.println(insert1);
 
 				Statement st = conn.createStatement();
@@ -95,43 +95,7 @@ public class InvoiveServer {
 		
 	}
 
-		public static void SetInvoice(int top) {
-			 String url = "jdbc:mysql://localhost:3306/ shibli_task";
-			 String username = "root";
-			 String password = "root";
-			Connection con = null;
-			try {
-				Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-				// Registering drivers
-				DriverManager.registerDriver(driver);
-				// Reference to connection interface
-				con = DriverManager.getConnection(url, username, password);
-				// Creating a statement
-				Statement st = con.createStatement();
-				Scanner scanner = new Scanner(System.in);
-				int count = 1;
-				String sql="SELECT * FROM invoice ORDER BY id LIMIT "+top;
-				ResultSet rs = st.executeQuery(sql);
-				while (rs.next() && count <= top) {
-					int id = rs.getInt("id");
-
-//					String customerFullName = rs.getString("customerFullName");
-//					String phoneNumber = rs.getString("phoneNumber");
-//					Date invoiceDate = rs.getDate("invoiceDate");
-//					int numberOfItems = rs.getInt("numberOfItems");
-//					int totalAmount = rs.getInt("totalAmount");
-//					int paidAmoun = rs.getInt("paidAmoun");
-//					int balance = rs.getInt("balance");
-					String Fax = rs.getString("Fax");
-					String Email = rs.getString("Email");
-					String Website = rs.getString("Website");
-					System.out.println(" "+Fax+""+Email+" "+Website);
-					count++;
-				}
-			} catch (Exception ex) {
-				System.err.println(ex);
-			}
-		}
+		
 
 
 	}

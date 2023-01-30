@@ -76,4 +76,41 @@ public class ItemServer {
 		System.err.println(ex);
 	}
 }
+	
+	public static void addNewItem() {
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String user = "root";
+		String pass = "root";
+		Scanner scanner = new Scanner(System.in);
+
+		Connection conn = null;
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			conn = DriverManager.getConnection(url, user, pass);
+			// Creating a statement
+			Statement st = conn.createStatement();
+
+//			System.out.println("Please Enter any id to Update Item data :");
+//			int userinput = scanner.nextInt();
+			System.out.println("Please Enter the new item Name :");
+			String itemName = scanner.next();
+			System.out.println("Please Enter the new unit Price:");
+			String unitPrice = scanner.next();
+			System.out.println("Please Enter the new quantity :");
+			int quantity = scanner.nextInt();
+			System.out.println("Please Enter the new qtyAmount :");
+			int qtyAmount = scanner.nextInt();
+			System.out.println("Please Enter qtyPrice :");
+			int qtyPrice = scanner.nextInt();
+
+			String sql = "UPDATE items SET itemName='" + itemName + "',unitPrice='" + unitPrice+"'+ ,quantity=" + quantity +" ,qtyAmount=" + qtyAmount +" ,qtyPrice=" + qtyPrice +" " ;
+			int result = st.executeUpdate(sql);
+		} catch (Exception ex) {
+			System.err.println(ex);
+
+		}
+
+	}
 }

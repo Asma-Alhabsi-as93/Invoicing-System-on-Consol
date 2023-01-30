@@ -11,9 +11,7 @@ int numberOfItems;
 int totalAmount;
 int paidAmoun;
 int balance;
-String Fax;
-String Email ;
-String Website;
+
 public int getId() {
 	return id;
 }
@@ -62,24 +60,7 @@ public int getBalance() {
 public void setBalance(int balance) {
 	this.balance = balance;
 }
-public String getFax() {
-	return Fax;
-}
-public void setFax(String fax) {
-	Fax = fax;
-}
-public String getEmail() {
-	return Email;
-}
-public void setEmail(String email) {
-	Email = email;
-}
-public String getWebsite() {
-	return Website;
-}
-public void setWebsite(String website) {
-	Website = website;
-}
+
 
 
 }

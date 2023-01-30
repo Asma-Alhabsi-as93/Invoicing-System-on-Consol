@@ -37,7 +37,7 @@ public class subMenue {
 				break;
 				
 			case 3:
-				InvoiveServer.SelectInvoice(2);
+				item_deteals_server.insertIntoTable(1);
 				break;
 				
 			case 4:

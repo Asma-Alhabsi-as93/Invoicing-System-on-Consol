@@ -28,14 +28,16 @@ public class ItemMnue {
 				switch(itemMenue) {
 				
 				case 1:
-					System.out.println("inter how many items you wont input");
-					int number=sc.nextInt();
-					ItemServer.insertIntoTable( number);
+//					System.out.println("inter how many items you wont input");
+//					int number=sc.nextInt();
+//					ItemServer.insertIntoTable( number);
+					ItemServer.addNewItem();
 					break;
 					
 				case 2:
 					ItemServer.deleteById();
 					break;
+					
 				case 3:
 					break;
 				case 4:
