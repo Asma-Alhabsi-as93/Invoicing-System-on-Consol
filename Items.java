@@ -1,18 +1,18 @@
 package c22;
 
 public class Items {
-	int  itemID;
+	int  id;
 	String itemName;
 	String  unitPrice;
 	int quantity ;
 	int qtyAmount;
 	int qtyPrice;
 	
-	public int getItemID() {
-		return itemID;
+	public int getId() {
+		return id;
 	}
-	public void setItemID(int itemID) {
-		this.itemID = itemID;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getItemName() {
 		return itemName;

@@ -31,16 +31,19 @@ public class ItemMnue {
 //					System.out.println("inter how many items you wont input");
 //					int number=sc.nextInt();
 //					ItemServer.insertIntoTable( number);
-					ItemServer.addNewItem();
+					ItemServer.addItem();
 					break;
 					
 				case 2:
-					ItemServer.deleteById();
+					ItemServer.deleteItem();
 					break;
 					
 				case 3:
+					ItemServer.updateprice();
 					break;
+					
 				case 4:
+					ItemServer.printItem();
 					break;
 				case 5:
 					itemExit = false;					

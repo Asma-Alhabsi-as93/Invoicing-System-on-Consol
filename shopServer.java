@@ -6,6 +6,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Random;
+import java.util.Scanner;
 
 public class shopServer {
 	public static void insertIntShopoTable() throws Throwable {
@@ -41,4 +42,28 @@ public class shopServer {
 	
 
 }
+	public static void add() {
+	String url = "jdbc:mysql://localhost:3306/shibli_task";
+	String user = "root";
+	String pass = "root";
+	Scanner scanner = new Scanner(System.in);
+
+	Connection conn = null;
+	try {
+		Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+		DriverManager.registerDriver(driver);
+		
+		conn = DriverManager.getConnection(url, user, pass);
+		// Creating a statement
+		Statement st = conn.createStatement();
+
+		System.out.println("Please Enter the  shope Name :");
+		String Shope_Name = scanner.next();
+		String sql = "insert into shop(Shope_Name)values('"+Shope_Name+"')";
+		int result = st.executeUpdate(sql);
+	} catch (Exception ex) {
+		System.err.println(ex);
+
+	}
 }
+	}

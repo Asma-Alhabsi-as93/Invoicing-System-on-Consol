@@ -74,12 +74,16 @@ public class main {
 				ItemMnue.Item();
 				break;
 			case 3:
-//				InvoiveServer .SetInvoice(1);
+				InvoiveServer .insertInvoice();
 				break;
 				
 			case 4:
 				
 				break;
+				
+			case 5:
+				InvoiveServer.report();
+					break;
 				
 				
 			}

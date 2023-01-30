@@ -46,4 +46,35 @@ public class item_deteals_server {
 				conn.close();
 		}
 	}
+	
+	
+	public static void addItem_deteals() {
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String user = "root";
+		String pass = "root";
+		Scanner scanner = new Scanner(System.in);
+
+		Connection conn = null;
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			
+			conn = DriverManager.getConnection(url, user, pass);
+			// Creating a statement
+			Statement st = conn.createStatement();
+
+			System.out.println("Please Enter the  Faxe :");
+			String Fax = scanner.next();
+			System.out.println("Please Enter the  Email :");
+			String Email = scanner.next();
+			System.out.println("Please Enter the  Website :");
+			String Website = scanner.next();
+			
+			String sql = "insert into shop_deteals(Fax,Emai,Website)values('"+Fax+"','"+Email+"','"+Website+"')";
+			int result = st.executeUpdate(sql);
+		} catch (Exception ex) {
+			System.err.println(ex);
+
+		}
+}
 }

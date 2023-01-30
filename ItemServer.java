@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class ItemServer {
 		Connection con = null;
 		
 		
-		String itemName = "books";
+		String itemName = "tables";
 		String unitPrice = "s4";
 		int quantity=4;
 		int qtyAmount=1;
@@ -49,7 +50,7 @@ public class ItemServer {
 				conn.close();
 		}
 	}
-	public static void deleteById() {
+	public static void deleteItem() {
 		String url = "jdbc:mysql://localhost:3306/shibli_task";
 		String user = "root";
 		String pass = "root";
@@ -64,7 +65,7 @@ public class ItemServer {
 			// Creating a statement
 			Statement st = conn.createStatement();
 			int inputid=scanner.nextInt();
-			String sql = "select * from items where id='" + inputid + "'";
+			String sql = "select * from items where id=" + inputid + "";
 			
 			int rs = st.executeUpdate(sql);
 
@@ -77,7 +78,7 @@ public class ItemServer {
 	}
 }
 	
-	public static void addNewItem() {
+	public static void addItem() {
 		String url = "jdbc:mysql://localhost:3306/shibli_task";
 		String user = "root";
 		String pass = "root";
@@ -105,7 +106,65 @@ public class ItemServer {
 			System.out.println("Please Enter qtyPrice :");
 			int qtyPrice = scanner.nextInt();
 
-			String sql = "UPDATE items SET itemName='" + itemName + "',unitPrice='" + unitPrice+"'+ ,quantity=" + quantity +" ,qtyAmount=" + qtyAmount +" ,qtyPrice=" + qtyPrice +" " ;
+			String sql = "insert into items(itemName,unitPrice,quantity,qtyAmount,qtyPrice)  values('" + itemName + "','" + unitPrice+"' ," + quantity +" ," + qtyAmount +" ," + qtyPrice +" );" ;
+			int result = st.executeUpdate(sql);
+		} catch (Exception ex) {
+			System.err.println(ex);
+
+		}
+
+	}
+	
+	public static void printItem(){
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String username = "root";
+		String password = "root";
+		 Scanner sc = new Scanner(System.in);
+		 System.out.println(" how many users you have to print");
+		 String SQL="SELECT * FROM items ORDER BY id LIMIT 10";
+			Connection conn = null;
+			try {
+				Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+				DriverManager.registerDriver(driver);
+				conn = DriverManager.getConnection(url,username, password);
+				Statement st = conn.createStatement();
+				ResultSet m = st.executeQuery(SQL);
+				 while(m.next()){
+			            //Display values
+			            System.out.print("ID: " + m.getInt("id"));
+			            System.out.print(", itemName: " + m.getInt("itemName"));
+			            System.out.print(", unitPrice: " + m.getInt("unitPrice"));
+			            System.out.print(", quantity: " + m.getInt("quantity"));
+			            System.out.println(", qtyAmount: " + m.getInt("qtyAmount"));
+			            System.out.println(", qtyPrice: " + m.getInt("qtyPrice"));
+				 }
+				conn.close();
+			}
+			catch (Exception ex) {
+				System.err.println(ex);
+			}
+}
+	
+	public static void updateprice() {
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String user = "root";
+		String pass = "root";
+		Scanner scanner = new Scanner(System.in);
+
+		Connection conn = null;
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			conn = DriverManager.getConnection(url, user, pass);
+			// Creating a statement
+			Statement st = conn.createStatement();
+
+			
+			System.out.println("Please changr the price:");
+			int qtyPrice = scanner.nextInt();
+	
+			String sql = "UPDATE items SET qtyPrice=" +qtyPrice + "";
 			int result = st.executeUpdate(sql);
 		} catch (Exception ex) {
 			System.err.println(ex);

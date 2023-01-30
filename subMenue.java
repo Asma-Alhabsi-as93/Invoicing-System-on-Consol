@@ -27,17 +27,18 @@ public class subMenue {
 			switch(SubMenue) {
 			
 			case 1:
-				System.out.println(" how many users you have to print");
-				int number = sc.nextInt();
-				InvoiveServer.insertIntoTable(number);
+//				System.out.println(" how many users you have to print");
+//				int number = sc.nextInt();
+				InvoiveServer. insertInvoice();
+				
 				break;
 				
 			case 2:
-				shopServer.insertIntShopoTable() ;
+				shopServer.add() ;
 				break;
 				
 			case 3:
-				item_deteals_server.insertIntoTable(1);
+				item_deteals_server.addItem_deteals();
 				break;
 				
 			case 4:
