@@ -28,9 +28,7 @@ public class ItemMnue {
 				switch(itemMenue) {
 				
 				case 1:
-//					System.out.println("inter how many items you wont input");
-//					int number=sc.nextInt();
-//					ItemServer.insertIntoTable( number);
+//					
 					ItemServer.addItem();
 					break;
 					
@@ -43,7 +41,9 @@ public class ItemMnue {
 					break;
 					
 				case 4:
-					ItemServer.printItem();
+					 System.out.println("how many item you want report!!");
+					 int mun2=sc.nextInt();
+					ItemServer.printItem(mun2);
 					break;
 				case 5:
 					itemExit = false;					

@@ -14,48 +14,17 @@ public class main {
 		Scanner menuescanner = new Scanner(System.in);
 		Stack<String> stk = new Stack<String>();
 		boolean menueExit = true;
-		boolean userExit= true;
 		
-//		while(userExit)
-//		{
-//		System.out.println("Enter User Name :");
-//		String teacherName=menuescanner.next();
-//		stk.push(teacherName);
-//		
-//		//int inputTeacherPassword = Integer.parseInt(teacherPassword);
-//		
-//		try {
-//		if(!teacherName.equals("Asma")){
-//			throw new Exception (" User Name Wrong");
-//		}
-//		
-//		}
-//		catch(Exception e){
-//			System.out.println(e.getMessage());
-//			continue;
-//		}
-//		System.out.println("Enter User Password :");
-//		String teacherPassword=menuescanner.next();
-//		stk.push(teacherPassword);
-//		
-//		try {
-//		if(!teacherPassword.equals("A-1234")){
-//			throw new Exception (" User password wrong");
-//		}
-//		}
-//		catch(Exception e){
-//			System.out.println(e.getMessage());
-//			continue;
-//		}
 
-		do {
+		while (menueExit) {
 		for(String x:menue.getMenuArray()) {
 			System.out.println(x);
 		}
 		
 			
 			int select = menuescanner.nextInt();
-
+			String st=String.valueOf(select);
+            stk.push(st);
 			switch (select) {
 			case 0:
 //				createTable.invoice();
@@ -78,17 +47,42 @@ public class main {
 				break;
 				
 			case 4:
-				
+				InvoiveServer.count();
 				break;
 				
 			case 5:
 				InvoiveServer.report();
 					break;
+			case 6:
+				System.out.println("Enter  id you wont search");
+			int number=menuescanner.nextInt();
+			InvoiveServer.serch(number);
+				break;
+				
+			case 7:
+				try {
+            Stack<String> stt = (Stack<String>) stk;
+            System.out.println(stt);
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+            break;
+			case 8:
+				System.out.println("Are you sure you want to exit? If yes, program ends, if No , then main menu reprinted again ");
+				String option=menuescanner.next();
+				if(option.equals("YES")) {
+					menueExit=false;
+					System.out.println("=======THANK YOU=============");
+				}
+				else if(option.equals("NO")) {
+					menueExit=true;
+				}
+				break;
 				
 				
 			}
-	}while (menueExit);
+	}menueExit=false;
 //		}
-		userExit = false;
+		
 }
 }

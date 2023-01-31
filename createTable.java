@@ -22,6 +22,13 @@ public class createTable {
 				+"paidAmoun INTEGER ,"
 				+"balance INTEGER,"
 				+ "PRIMARY KEY AUTO_INCREMENT (id))";
+		
+System.out.println("plz enter the URL!");
+String url=sc.next();
+System.out.println("plz enter the username!");
+String username=sc.next();
+System.out.println("plz enter the password!");
+String password=sc.next();
 
 		Connection conn = null;
 		try {

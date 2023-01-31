@@ -57,6 +57,7 @@ public class ItemServer {
 		Scanner scanner = new Scanner(System.in);
 
 		Connection conn = null;
+		
 		try {
 			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
@@ -67,8 +68,8 @@ public class ItemServer {
 			int inputid=scanner.nextInt();
 			String sql = "select * from items where id=" + inputid + "";
 			
-			int rs = st.executeUpdate(sql);
-
+			ResultSet rs = st.executeQuery(sql);
+            System.out.println(sql+"culom delete Successfully!");
 		      // execute the preparedstatement
 		      
 		      conn.close();
@@ -83,13 +84,18 @@ public class ItemServer {
 		String user = "root";
 		String pass = "root";
 		Scanner scanner = new Scanner(System.in);
-
+		System.out.println("plz enter the URL!");
+		String url1=scanner.next();
+		System.out.println("plz enter the username!");
+		String username=scanner.next();
+		System.out.println("plz enter the password!");
+		String password=scanner.next();
 		Connection conn = null;
 		try {
 			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			// Reference to connection interface
-			conn = DriverManager.getConnection(url, user, pass);
+			conn = DriverManager.getConnection(url1, user, pass);
 			// Creating a statement
 			Statement st = conn.createStatement();
 
@@ -115,25 +121,36 @@ public class ItemServer {
 
 	}
 	
-	public static void printItem(){
+	public static void printItem(int num){
 		String url = "jdbc:mysql://localhost:3306/shibli_task";
 		String username = "root";
 		String password = "root";
 		 Scanner sc = new Scanner(System.in);
-		 System.out.println(" how many users you have to print");
-		 String SQL="SELECT * FROM items ORDER BY id LIMIT 10";
+		 System.out.println("plz enter the URL!");
+		 String url1=sc.next();
+		 System.out.println("plz enter the username!");
+		 String username1=sc.next();
+		 System.out.println("plz enter the password!");
+		 String password1=sc.next();
 			Connection conn = null;
+			
+			 
+			 
+			
 			try {
 				Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
 				DriverManager.registerDriver(driver);
-				conn = DriverManager.getConnection(url,username, password);
+				conn = DriverManager.getConnection(url1,username1, password1);
 				Statement st = conn.createStatement();
+				
+				 System.out.println("=====================================");
+				 String SQL="SELECT * FROM items ORDER BY id LIMIT "+num;
 				ResultSet m = st.executeQuery(SQL);
 				 while(m.next()){
 			            //Display values
 			            System.out.print("ID: " + m.getInt("id"));
-			            System.out.print(", itemName: " + m.getInt("itemName"));
-			            System.out.print(", unitPrice: " + m.getInt("unitPrice"));
+			            System.out.print(", itemName: " + m.getString("itemName"));
+			            System.out.print(", unitPrice: " + m.getString("unitPrice"));
 			            System.out.print(", quantity: " + m.getInt("quantity"));
 			            System.out.println(", qtyAmount: " + m.getInt("qtyAmount"));
 			            System.out.println(", qtyPrice: " + m.getInt("qtyPrice"));
@@ -161,7 +178,7 @@ public class ItemServer {
 			Statement st = conn.createStatement();
 
 			
-			System.out.println("Please changr the price:");
+			System.out.println("Please change the price:");
 			int qtyPrice = scanner.nextInt();
 	
 			String sql = "UPDATE items SET qtyPrice=" +qtyPrice + "";

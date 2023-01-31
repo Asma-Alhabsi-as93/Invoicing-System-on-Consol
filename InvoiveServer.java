@@ -55,11 +55,17 @@ public class InvoiveServer {
 		Scanner scanner = new Scanner(System.in);
 
 		Connection conn = null;
+		System.out.println("plz enter the URL!");
+		String url1=scanner.next();
+		System.out.println("plz enter the username!");
+		String username=scanner.next();
+		System.out.println("plz enter the password!");
+		String password=scanner.next();
 		try {
 			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			// Reference to connection interface
-			conn = DriverManager.getConnection(url, user, pass);
+			conn = DriverManager.getConnection(url1, user, pass);
 			// Creating a statement
 			Statement st = conn.createStatement();
 
@@ -81,7 +87,8 @@ public class InvoiveServer {
 			int balance = scanner.nextInt();
 
 
-			String sql = "insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance)  values('" + customerFullName + "','" + phoneNumber+"' ,'"+invoiceDate+"'," + numberOfItems +" ," + totalAmount +" ,"+paidAmoun+"," + balance +" );" ;
+			String sql = "insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance)  "
+					+ "values('" + customerFullName + "','" + phoneNumber+"' ,'"+invoiceDate+"'," + numberOfItems +" ," + totalAmount +" ,"+paidAmoun+"," + balance +" );" ;
 			int result = st.executeUpdate(sql);
 		} catch (Exception ex) {
 			System.err.println(ex);
@@ -149,12 +156,99 @@ public class InvoiveServer {
 			// Creating a statement
 			Statement st = conn.createStatement();
 		
-		String report = "select id,invoiceDate,customerFullName,numberOfItems,totalAmount,balancefrom invoice";
+		String report = "select *from invoice";
 		
-			int result = st.executeUpdate(report);
+			ResultSet result = st.executeQuery(report);
+			if(result.next()) {
+				System.out.println("invoice No:"+result.getInt(1));
+//				System.out.println("invoiceDate:"+result.getDate(1));
+				System.out.println("Customer Name:"+result.getString(1));
+				System.out.println("No of items:"+result.getInt(1));
+				System.out.println("Total:"+result.getInt(1));
+				System.out.println("balance:"+result.getInt(1));
+				
+			}
 		} catch (Exception ex) {
 			System.err.println(ex);
 		}
 
 	}
+	public static void serch(int num) {
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String user = "root";
+		String pass = "root";
+		Scanner scanner = new Scanner(System.in);
+		Connection conn = null;
+		System.out.println("plz enter the URL!");
+		String url1=scanner.next();
+		System.out.println("plz enter the username!");
+		String user1=scanner.next();
+		System.out.println("plz enter the password!");
+		String pass1=scanner.next();
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			conn = DriverManager.getConnection(url1, user1, pass1);
+			// Creating a statement
+			Statement st = conn.createStatement();
+			String search = "SELECT * FROM invoice WHERE id=" +num;
+			ResultSet result = st.executeQuery(search);
+			if(result.next()) {
+				System.out.println("id:"+result.getInt(1));
+				System.out.println("invoiceDate:"+result.getDate(1));
+				System.out.println("customerFullName:"+result.getString(1));
+				System.out.println("numberOfItems:"+result.getInt(1));
+				System.out.println("totalAmount:"+result.getInt(1));
+				System.out.println("balance:"+result.getInt(1));
+				
+			}
+		
+	} catch (Exception ex) {
+		System.err.println(ex);
+	}
 }
+	
+	public static void count() {
+		String url = "jdbc:mysql://localhost:3306/shibli_task";
+		String user = "root";
+		String pass = "root";
+		Scanner scanner = new Scanner(System.in);
+		Connection conn = null;
+		System.out.println("plz enter the URL!");
+		String url1=scanner.next();
+		System.out.println("plz enter the username!");
+		String user1=scanner.next();
+		System.out.println("plz enter the password!");
+		String pass1=scanner.next();
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			conn = DriverManager.getConnection(url1, user1, pass1);
+			// Creating a statement
+			Statement st = conn.createStatement();
+			String search = "select count(id)from invoice";
+			ResultSet result = st.executeQuery(search);
+			if(result.next()) {
+				System.out.println("No Of Items:"+result.getInt(1));
+			}	
+			String count = "select count(numberOfItems)from invoice";
+			ResultSet result1 = st.executeQuery(count);
+			if(result1.next()) {
+				System.out.println("No of Invoices:"+result1.getInt(1));
+			}
+			String sum = "select sum(totalAmount)from invoice";
+			ResultSet result11 = st.executeQuery(sum);
+			if(result11.next()) {
+				System.out.println("Total Sales:"+result11.getInt(1));
+				
+			}
+		
+	} catch (Exception ex) {
+		System.err.println(ex);
+	}
+	
+}
+}
+	
