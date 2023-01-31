@@ -3,6 +3,7 @@ package c22;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
@@ -23,6 +24,7 @@ public class item_deteals_server {
 	Random rn = new Random();
 		Integer NumberToAdd = rn.nextInt(100);
 		Connection conn = null;
+		
 		try {
 			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
@@ -61,8 +63,10 @@ public class item_deteals_server {
 			
 			conn = DriverManager.getConnection(url, user, pass);
 			// Creating a statement
-			Statement st = conn.createStatement();
-
+			
+			System.out.println("Please Enter shop name :");
+			String shop_name=scanner.next();
+			
 			System.out.println("Please Enter the  Faxe :");
 			String Fax = scanner.next();
 			System.out.println("Please Enter the  Email :");
@@ -70,8 +74,29 @@ public class item_deteals_server {
 			System.out.println("Please Enter the  Website :");
 			String Website = scanner.next();
 			
-			String sql = "insert into shop_deteals(Fax,Emai,Website)values('"+Fax+"','"+Email+"','"+Website+"')";
-			int result = st.executeUpdate(sql);
+			String sql1 = "select id from shop where Shope_Name=?";
+			PreparedStatement shopPreparedStatment = conn.prepareStatement(sql1);
+            shopPreparedStatment.setString(1, shop_name);
+            int id_shop = 0;
+            ResultSet shopResultSet = shopPreparedStatment.executeQuery();
+            if(shopResultSet.next())
+            {
+            	id_shop = shopResultSet.getInt("id");
+                System.out.println(id_shop);
+            }
+            String sql2 = "insert into shop_deteals(id_shop,Fax,Email,Website)"
+    				+ " values('"+ id_shop+"','"+ Fax+"','"+ Email+"','"+ Website+"')";
+    		Statement st1 = conn.createStatement();
+    		//
+    		// Executing query
+    		int result = st1.executeUpdate(sql2);
+    		if (result >= 1)
+    			System.out.println("inserted successfully  ");
+    		else
+    			System.out.println("insertion failed");
+		conn.close();
+			
+		
 		} catch (Exception ex) {
 			System.err.println(ex);
 

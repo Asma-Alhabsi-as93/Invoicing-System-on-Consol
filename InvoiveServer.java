@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Random;
@@ -71,6 +72,8 @@ public class InvoiveServer {
 
 //			System.out.println("Please Enter any id to Update Item data :");
 //			int userinput = scanner.nextInt();
+//			System.out.println("Please Enter the shop_name :");
+//			String Shope_Name = scanner.next();
 			System.out.println("Please Enter the  customerFullName :");
 			String customerFullName = scanner.next();
 			System.out.println("Please Enter the  phoneNumber:");
@@ -85,17 +88,27 @@ public class InvoiveServer {
 			int paidAmoun = scanner.nextInt();
 			System.out.println("Please Enter balance :");
 			int balance = scanner.nextInt();
-
-
+			
+//		
 			String sql = "insert into invoice(customerFullName,phoneNumber,invoiceDate,numberOfItems,totalAmount,paidAmoun,balance)  "
-					+ "values('" + customerFullName + "','" + phoneNumber+"' ,'"+invoiceDate+"'," + numberOfItems +" ," + totalAmount +" ,"+paidAmoun+"," + balance +" );" ;
-			int result = st.executeUpdate(sql);
+					+ "values('" + customerFullName + "','" + phoneNumber+"' ,'"+invoiceDate+"'," + numberOfItems +" ," + totalAmount +" ,"+paidAmoun+"," + balance +" )" ;
+			Statement st1 = conn.createStatement();
+    		//
+    		// Executing query
+    		int result = st1.executeUpdate(sql);
+    		if (result >= 1)
+    			System.out.println("inserted successfully  ");
+    		else
+    			System.out.println("insertion failed");
+		conn.close();
 		} catch (Exception ex) {
 			System.err.println(ex);
 
 		}
-
 	}
+	
+
+	
 	public static void insertIntoTable(int number) throws Throwable {
 		 String url = "jdbc:mysql://localhost:3306/ shibli_task";
 		 String username = "root";
@@ -173,7 +186,7 @@ public class InvoiveServer {
 		}
 
 	}
-	public static void serch(int num) {
+	public static void search(int num) {
 		String url = "jdbc:mysql://localhost:3306/shibli_task";
 		String user = "root";
 		String pass = "root";

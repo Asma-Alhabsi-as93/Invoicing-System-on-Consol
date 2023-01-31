@@ -13,15 +13,17 @@ public class createTable {
 	
 	public static boolean invoice() {
 		Scanner sc = new Scanner(System.in);
-		String sqlDB = "CREATE TABLE invoice" + "(id INTEGER ,"
-				+ " customerFullName VARCHAR(8) not NULL,"
+		String sqlDB = "CREATE TABLE invoice" + "(id INTEGER NOT NULL AUTO_INCREMENT ,"
+				+ " customerFullName VARCHAR(8) not NULL,"+" InvoiceItems_id INTEGER ,"
+				 +"FOREIGN KEY (InvoiceItems_id)  REFERENCES items(id) ON DELETE CASCADE ,"
 				+ "phoneNumber varchar(20),"
 				+ "invoiceDate Date not NULL,"
 				+"numberOfItems INTEGER,"
 				+"totalAmount INTEGER,"
 				+"paidAmoun INTEGER ,"
 				+"balance INTEGER,"
-				+ "PRIMARY KEY AUTO_INCREMENT (id))";
+				+ "PRIMARY KEY  (id))";
+		String sqlOutIncrement="Alter Table invoice AUTO_INCREMENT=1";
 		
 System.out.println("plz enter the URL!");
 String url=sc.next();
@@ -32,11 +34,12 @@ String password=sc.next();
 
 		Connection conn = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			conn = DriverManager.getConnection(url, username, password);
 			Statement st = conn.createStatement();
 			int m = st.executeUpdate(sqlDB);
+			st.executeUpdate(sqlOutIncrement);
 
 			if ((m >= 0)) {
 				System.out.println("Created table in given database...");
@@ -58,7 +61,9 @@ String password=sc.next();
 	public static boolean items() {
 		
 		Scanner sc = new Scanner(System.in);
-		String sqlDB = "CREATE TABLE items" + "(id INTEGER "+" REFERENCES invoice(id) ,"
+		String sqlDB = "CREATE TABLE items" +"( id INTEGER not NULL,"
+			  + "item_ID INTEGER not NULL,"
+		      +"FOREIGN KEY (item_ID) REFERENCES shop_deteals(id)ON DELETE CASCADE,"
 				+ " itemName VARCHAR(8) not NULL,"
 				+ "unitPrice varchar(20),"
 				+"quantity INTEGER,"
@@ -120,7 +125,10 @@ String password=sc.next();
 	
 	public static boolean shop_deteals() {
 		Scanner sc = new Scanner(System.in);
-		String sqlDB = "CREATE TABLE shop_deteals" + "(id INTEGER "+"REFERENCES shop(id) ,"
+		String sqlDB = "CREATE TABLE shop_deteals" 
+		        + "(id INTEGER not NULL,"
+		        + "id_shop INTEGER not NULL,"
+		        + "FOREIGN KEY(id_shop)REFERENCES shop(id)ON DELETE CASCADE ,"
 				+ " Fax VARCHAR(8) not NULL,"
 				+"Email VARCHAR(100),"
 				+"Website VARCHAR(100),"
@@ -128,7 +136,7 @@ String password=sc.next();
 
 		Connection conn = null;
 		try {
-			Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			conn = DriverManager.getConnection(url, username, password);
 			Statement st = conn.createStatement();

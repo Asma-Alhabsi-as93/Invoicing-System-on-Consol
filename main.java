@@ -27,10 +27,10 @@ public class main {
             stk.push(st);
 			switch (select) {
 			case 0:
-//				createTable.invoice();
+				createTable.invoice();
 //				createTable.items();
 //				createTable.shop();
-				createTable.shop_deteals();
+//				createTable.shop_deteals();
 				
 				break;
 			
@@ -56,7 +56,7 @@ public class main {
 			case 6:
 				System.out.println("Enter  id you wont search");
 			int number=menuescanner.nextInt();
-			InvoiveServer.serch(number);
+			InvoiveServer.search(number);
 				break;
 				
 			case 7:
