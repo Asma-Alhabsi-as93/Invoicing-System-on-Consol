@@ -11,7 +11,13 @@ int numberOfItems;
 int totalAmount;
 int paidAmoun;
 int balance;
-
+Items[]Items;
+public Items[] getItems() {
+	return Items;
+}
+public void setItems(Items[] items) {
+	Items = items;
+}
 public int getId() {
 	return id;
 }

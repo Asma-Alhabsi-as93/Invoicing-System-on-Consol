@@ -102,8 +102,8 @@ public class ItemServer {
 
 //			System.out.println("Please Enter any id to Update Item data :");
 //			int userinput = scanner.nextInt();
-			System.out.println("Please Enter the shop_name :");
-			String shop_name = scanner.next();
+//			System.out.println("Please Enter the shop_name :");
+//			String shop_name = scanner.next();
 			System.out.println("Please Enter the new item Name :");
 			String itemName = scanner.next();
 			System.out.println("Please Enter the new unit Price:");
@@ -117,16 +117,16 @@ public class ItemServer {
 
 			
 			
-			String sql1 = "SELECT shop_deteals.id FROM shop_deteals INNER JOIN shop ON shop.id = shop_deteals.id_shop  where shop.Shope_Name=?";
-			PreparedStatement shopPreparedStatment = conn.prepareStatement(sql1);
-            shopPreparedStatment.setString(1, shop_name);
-            int shop_deteals_id = 0;
-            ResultSet shopResultSet = shopPreparedStatment.executeQuery();
-            if(shopResultSet.next())
-            {
-            	shop_deteals_id = shopResultSet.getInt("id");
-                System.out.println(shop_deteals_id);
-            }
+//			String sql1 = "SELECT shop_deteals.id FROM shop_deteals INNER JOIN shop ON shop.id = shop_deteals.id_shop  where shop.Shope_Name=?";
+//			PreparedStatement shopPreparedStatment = conn.prepareStatement(sql1);
+//            shopPreparedStatment.setString(1, shop_name);
+//            int shop_deteals_id = 0;
+//            ResultSet shopResultSet = shopPreparedStatment.executeQuery();
+//            if(shopResultSet.next())
+//            {
+//            	shop_deteals_id = shopResultSet.getInt("id");
+//                System.out.println(shop_deteals_id);
+//            }
             String sql2 = "insert into items(itemName,unitPrice,quantity,qtyAmount,qtyPrice)"
     				+ " values('" + itemName + "','" + unitPrice+"' ," + quantity +" ," + qtyAmount +" ," + qtyPrice +" )";
     		Statement st1 = conn.createStatement();
