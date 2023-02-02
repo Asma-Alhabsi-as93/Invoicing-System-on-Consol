@@ -85,59 +85,38 @@ public class ItemServer {
 		String user = "root";
 		String pass = "root";
 		Scanner scanner = new Scanner(System.in);
+		String sql2 = "INSERT INTO  items(itemName,unitPrice,quantity,qtyAmount,qtyPrice) VALUES(?,?,?,?,?)";
 		System.out.println("plz enter the URL!");
 		String url1=scanner.next();
 		System.out.println("plz enter the username!");
 		String username=scanner.next();
 		System.out.println("plz enter the password!");
 		String password=scanner.next();
+		System.out.println("Please Enter the new item Name :");
+		String itemName = scanner.next();
+		System.out.println("Please Enter the new unit Price:");
+		String unitPrice = scanner.next();
+		System.out.println("Please Enter the new quantity :");
+		int quantity = scanner.nextInt();
+		System.out.println("Please Enter the new qtyAmount :");
+		int qtyAmount = scanner.nextInt();
+		System.out.println("Please Enter qtyPrice :");
+		int qtyPrice = scanner.nextInt();
+
 		Connection conn = null;
 		try {
 			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			DriverManager.registerDriver(driver);
 			// Reference to connection interface
 			conn = DriverManager.getConnection(url1, user, pass);
-			// Creating a statement
-			
+			PreparedStatement pstmt=conn.prepareStatement(sql2);
+		  pstmt.setString(1, itemName);
+		  pstmt.setString(2, unitPrice);
+		  pstmt.setInt(3, quantity);
+		  pstmt.setInt(4, qtyAmount);
+		  pstmt.setInt(5, qtyPrice);
+		  pstmt.executeUpdate();
 
-//			System.out.println("Please Enter any id to Update Item data :");
-//			int userinput = scanner.nextInt();
-//			System.out.println("Please Enter the shop_name :");
-//			String shop_name = scanner.next();
-			System.out.println("Please Enter the new item Name :");
-			String itemName = scanner.next();
-			System.out.println("Please Enter the new unit Price:");
-			String unitPrice = scanner.next();
-			System.out.println("Please Enter the new quantity :");
-			int quantity = scanner.nextInt();
-			System.out.println("Please Enter the new qtyAmount :");
-			int qtyAmount = scanner.nextInt();
-			System.out.println("Please Enter qtyPrice :");
-			int qtyPrice = scanner.nextInt();
-
-			
-			
-//			String sql1 = "SELECT shop_deteals.id FROM shop_deteals INNER JOIN shop ON shop.id = shop_deteals.id_shop  where shop.Shope_Name=?";
-//			PreparedStatement shopPreparedStatment = conn.prepareStatement(sql1);
-//            shopPreparedStatment.setString(1, shop_name);
-//            int shop_deteals_id = 0;
-//            ResultSet shopResultSet = shopPreparedStatment.executeQuery();
-//            if(shopResultSet.next())
-//            {
-//            	shop_deteals_id = shopResultSet.getInt("id");
-//                System.out.println(shop_deteals_id);
-//            }
-            String sql2 = "insert into items(itemName,unitPrice,quantity,qtyAmount,qtyPrice)"
-    				+ " values('" + itemName + "','" + unitPrice+"' ," + quantity +" ," + qtyAmount +" ," + qtyPrice +" )";
-    		Statement st1 = conn.createStatement();
-    		//
-    		// Executing query
-    		int result = st1.executeUpdate(sql2);
-    		if (result >= 1)
-    			System.out.println("inserted successfully  ");
-    		else
-    			System.out.println("insertion failed");
-		conn.close();
 			
 		} catch (Exception ex) {
 			System.err.println(ex);

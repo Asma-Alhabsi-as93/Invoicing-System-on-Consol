@@ -27,7 +27,7 @@ public class main {
             stk.push(st);
 			switch (select) {
 			case 0:
-				createTable.invoice();
+//				createTable.invoice();
 //				createTable.items();
 //				createTable.shop();
 //				createTable.shop_deteals();

@@ -61,15 +61,14 @@ String password=sc.next();
 	public static boolean items() {
 		
 		Scanner sc = new Scanner(System.in);
-		String sqlDB = "CREATE TABLE items" +"( id INTEGER not NULL,"
+		String sqlDB = "CREATE TABLE items" +"( id INTEGER  PRIMARY KEY not NULL AUTO_INCREMENT ,"
 			  + "item_ID INTEGER not NULL,"
 		      +"FOREIGN KEY (item_ID) REFERENCES shop_deteals(id)ON DELETE CASCADE,"
 				+ " itemName VARCHAR(8) not NULL,"
 				+ "unitPrice varchar(20),"
 				+"quantity INTEGER,"
 				+"qtyAmount INTEGER,"
-				+"qtyPrice INTEGER ,"
-				+ "PRIMARY KEY AUTO_INCREMENT (id))";
+				+"qtyPrice INTEGER )";
 
 		Connection conn = null;
 		try {
